@@ -67,31 +67,3 @@ class YaGPT:
         except Exception as e:
             # Общая обработка ошибок
             raise YaGPTException(f"Unexpected error: {e}")
-
-
-# Пример использования
-if __name__ == "__main__":
-    try:
-        # Замени значения переменных folder_id и iam_token на свои
-        folder_id = "ваш_идентификатор_каталога"
-        iam_token = "ваш_IAM-токен"
-
-        lm = YaGPT(folder_id=folder_id, iam_token=iam_token)
-
-        # Пример запроса
-        result = lm.instruct(
-            model="general",
-            instruction_text="Найди ошибки в тексте и исправь их",
-            request_text="Ламинат подойдет для укладке на кухне или в детской комнате – он не боиться влаги и механических повреждений благодаря защитному слою из облицованных меламиновых пленок толщиной 0,2 мм и обработанным воском замкам",
-            max_tokens=1500,
-            temperature=0.6)
-
-        if result:
-            for alternative in result:
-                print(f"Generated Text: {alternative['text']}")
-                print(f"Score: {alternative['score']}")
-                print(f"Number of Tokens: {alternative['num_tokens']}")
-                print()
-    except YaGPTException as e:
-        # Обработка ошибок в библиотеке
-        print(f"Language Model Error: {e}")
